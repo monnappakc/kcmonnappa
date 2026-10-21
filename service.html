@@ -1,55 +1,205 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Service | kcmonnappa</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Military Service</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F3F2EC; --card:#FFFFFF; --band:#0E1A2B; --band-text:#EEF1F5;
+  --text:#1B2430; --muted:#56606D; --rule:#D3D6CD; --accent:#8F6A25;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C1420; --card:#132034; --band:#060C15; --band-text:#E7ECF2;
+    --text:#D9DFE7; --muted:#9AA7B8; --rule:#26364B; --accent:#D8B36E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C1420; --card:#132034; --band:#060C15; --band-text:#E7ECF2;
+  --text:#D9DFE7; --muted:#9AA7B8; --rule:#26364B; --accent:#D8B36E;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--text);font-family:"IBM Plex Sans",system-ui,Arial,sans-serif;font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-weight:500;line-height:1.15;text-wrap:balance;margin:0;color:var(--text)}
+p{margin:0 0 14px;max-width:68ch}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));}
+.wrap > *{min-width:0}
+.band{background:var(--band);color:var(--band-text)}
+.band .wrap{padding-block:0}
+.label{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:12px}
+.band .label{color:#D8B36E}
+section.block{padding-block:56px;border-top:1px solid var(--rule)}
+section.block:first-of-type{border-top:0}
+h2.sec{font-size:clamp(1.7rem,4vw,2.2rem);margin-bottom:20px}
+.lede{font-size:1.15rem;line-height:1.6;color:var(--muted);max-width:60ch}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--band);color:var(--band-text)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-block:14px}
+.brand{font-family:"Source Serif 4",Georgia,serif;font-size:1.15rem;font-weight:600;color:var(--band-text);text-decoration:none;letter-spacing:.01em}
+.nav{display:flex;flex-wrap:wrap;gap:4px 16px}
+.nav a{color:var(--band-text);opacity:.78;text-decoration:none;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover{opacity:1}
+.nav a[aria-current="page"]{opacity:1;border-bottom-color:#D8B36E}
+.theme-btn{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.04em;background:transparent;color:var(--band-text);border:1px solid rgba(231,236,242,.35);border-radius:4px;padding:6px 11px;cursor:pointer}
+
+/* hero */
+.hero{padding-block:64px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.1rem,5.4vw,3.3rem);letter-spacing:-.01em;margin:10px 0 18px;color:var(--band-text)}
+.hero .lede{color:#B9C4D2}
+.hero .photo{width:100%;max-width:340px;justify-self:end;aspect-ratio:520/822;object-fit:cover;display:block;border:1px solid rgba(231,236,242,.18)}
+.hero .status{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.tag{font:400 12px "IBM Plex Mono",monospace;border:1px solid rgba(231,236,242,.3);color:#D6DEE8;padding:4px 10px;border-radius:3px}
+.tag.gold{border-color:#D8B36E;color:#D8B36E}
+
+/* figures */
+.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.figures > div{padding:22px 20px;border-left:1px solid var(--rule)}
+.figures > div:first-child{border-left:0}
+.figures .n{font-family:"Source Serif 4",Georgia,serif;font-size:2.4rem;line-height:1;color:var(--text);font-variant-numeric:tabular-nums}
+.figures .t{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--rule);padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--text);min-width:0}
+a.card:hover{border-color:var(--accent)}
+.card h3{font-size:1.25rem}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .more{margin-top:auto;font:500 12px "IBM Plex Mono",monospace;color:var(--accent);letter-spacing:.04em}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule);display:grid;gap:0}
+.tl li{position:relative;padding:4px 0 28px 28px}
+.tl li::before{content:"";position:absolute;left:-5px;top:9px;width:9px;height:9px;background:var(--paper);border:2px solid var(--accent)}
+.tl .yr{font:500 12px "IBM Plex Mono",monospace;color:var(--accent);letter-spacing:.04em}
+.tl h3{font-size:1.25rem;margin:4px 0 8px}
+.tl p{color:var(--muted);margin:0 0 8px}
+
+/* details accordion */
+.acc{display:grid;gap:10px}
+.acc details{background:var(--card);border:1px solid var(--rule);padding:14px 18px}
+.acc summary{cursor:pointer;font-family:"Source Serif 4",Georgia,serif;font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent)}
+.acc details[open] summary::after{content:"-"}
+.acc details p{margin:12px 0 0;color:var(--muted);font-size:15px}
+
+/* publications */
+.toolbar{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin-bottom:12px}
+.toolbar input,.toolbar select{width:100%;font:15px "IBM Plex Sans",sans-serif;color:var(--text);background:var(--card);border:1px solid var(--rule);padding:10px 12px;border-radius:0}
+@media (max-width:720px){.toolbar{grid-template-columns:1fr}}
+.count{font:12px "IBM Plex Mono",monospace;color:var(--muted);margin:6px 0 4px;letter-spacing:.03em}
+.pubs{list-style:none;margin:0;padding:0}
+.pubs li{border-top:1px solid var(--rule);padding:16px 0;display:grid;grid-template-columns:64px minmax(0,1fr);gap:4px 18px}
+.pubs li:last-child{border-bottom:1px solid var(--rule)}
+.pubs .y{font:500 13px "IBM Plex Mono",monospace;color:var(--accent);padding-top:3px}
+.pubs .ti{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;line-height:1.35;color:var(--text)}
+.pubs .meta{font-size:13px;color:var(--muted);margin-top:6px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.pubs .st{font:500 11px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border:1px solid var(--rule);border-radius:2px}
+.pubs .st.pub{border-color:var(--accent);color:var(--accent)}
+.pubs[hidden]{display:none}
+.bars{width:100%;height:auto;display:block;max-width:560px}
+.bars text{fill:var(--muted);font:12px "IBM Plex Mono",monospace}
+.bars .val{fill:var(--text)}
+.bars rect{fill:var(--accent)}
+.stat-row{display:flex;gap:28px;flex-wrap:wrap;margin:6px 0 26px}
+.stat-row div{font-size:13px;color:var(--muted)}
+.stat-row b{display:block;font:500 1.7rem "Source Serif 4",Georgia,serif;color:var(--text);font-variant-numeric:tabular-nums}
+.profiles{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.profiles a{font:500 13px "IBM Plex Mono",monospace;border:1px solid var(--rule);padding:8px 12px;text-decoration:none;background:var(--card)}
+
+/* lists */
+.bullets{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.bullets li{border-left:2px solid var(--accent);padding-left:16px;max-width:70ch}
+.bullets b{display:block;font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.05rem;color:var(--text)}
+.bullets span{color:var(--muted)}
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px}
+@media (max-width:820px){.two,.hero-grid{grid-template-columns:minmax(0,1fr)}.hero .photo{justify-self:start}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font:500 12px "IBM Plex Mono",monospace;padding:7px 12px;border:1px solid var(--rule);background:var(--card);color:var(--text);cursor:pointer;border-radius:2px}
+.chip[aria-pressed="true"]{background:var(--band);color:var(--band-text);border-color:var(--band)}
+
+/* footer */
+.site-foot{padding-block:36px;font-size:13px;color:#9AA7B8}
+.site-foot a{color:#D8B36E}
+.site-foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+[hidden]{display:none!important}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="index.html">kcmonnappa</a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="service.html" class="active">Service</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="writing.html">Writing</a>
-        <a href="citations.html">Citations</a>
-        <a href="work.html">Work</a>
-        <a href="qualifications.html">Qualifications</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">K C Monnappa</a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="service.html" aria-current="page">Service</a><a href="research.html">Research</a><a href="publications.html">Publications</a><a href="writing.html">Writing</a><a href="citations.html">Citations</a><a href="work.html">Work</a><a href="qualifications.html">Qualifications</a></nav>
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Switch colour theme">Dark mode</button>
+  </div>
+</header>
+<main>
 
-  <main>
-    <section class="section">
-      <div class="container narrow">
-        <p class="eyebrow">Service</p>
-        <h1>Military service</h1>
-        <p>Thirty-one years in the Indian Army, retired as a Colonel in January 2026.</p>
-        <ul class="bullet-list">
-          <li>Special Forces and commando training</li>
-          <li>Infantry and command roles</li>
-          <li>Army aviation and helicopter pilot training</li>
-          <li>Staff appointments at Army HQ and command-level institutions</li>
-          <li>Instructional and legal appointments</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+<section class="band"><div class="wrap" style="padding-block:56px">
+  <span class="label">Service</span>
+  <h1 style="font-size:clamp(2rem,4.8vw,2.9rem);color:var(--band-text)">Military service</h1>
+  <p class="lede" style="color:#B9C4D2;margin-top:14px">Thirty-one years in the Indian Army, retired as a Colonel in January 2026.</p>
+</div></section>
+<section class="block"><div class="wrap">
+  <div class="cards">
+    <div class="card"><h3>Special Forces</h3><p>Served with a special forces unit, and qualified as a commando.</p></div>
+    <div class="card"><h3>Infantry</h3><p>Commanded infantry companies and served as second-in-command of two battalions, in the North East, high-altitude and desert areas.</p></div>
+    <div class="card"><h3>Army Aviation</h3><p>Qualified as a helicopter pilot and served in army aviation units and at Army HQ.</p></div>
+  </div>
+</div></section>
+<section class="block"><div class="wrap two">
+  <div>
+    <span class="label">Instructional appointments</span>
+    <ul class="bullets">
+      <li><b>Instructor</b><span>Teaching and training officers and soldiers, including training wing command in driving and maintenance.</span></li>
+      <li><b>Legal cell</b><span>Officer in charge of a legal cell, advising on military law, policy and litigation.</span></li>
+    </ul>
+  </div>
+  <div>
+    <span class="label">Staff appointments</span>
+    <ul class="bullets">
+      <li><b>Army HQ, New Delhi</b><span>Staff work on force expansion, aviation policy and personnel.</span></li>
+      <li><b>Northern Command</b><span>Discipline and vigilance.</span></li>
+      <li><b>Station administration</b><span>Staff appointments running large military stations.</span></li>
+    </ul>
+  </div>
+</div></section>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>kcmonnappa</span>
-      <span>
-        <a href="https://orcid.org/0009-0003-9625-8953" target="_blank" rel="noreferrer">ORCID</a>
-        <a href="https://www.researchgate.net/profile/Monnappa-K-C/research" target="_blank" rel="noreferrer">ResearchGate</a>
-        <a href="https://nehu.academia.edu/Monnappakc" target="_blank" rel="noreferrer">Academia.edu</a>
-      </span>
-    </div>
-  </footer>
+</main>
+<footer class="site-foot band">
+  <div class="wrap">
+    <span>K C Monnappa. Academic and professional profiles are listed below.</span>
+    <span>
+      <a href="https://orcid.org/0009-0003-9625-8953" target="_blank" rel="noopener">ORCID</a> &middot;
+      <a href="https://www.researchgate.net/profile/Monnappa-K-C/research" target="_blank" rel="noopener">ResearchGate</a> &middot;
+      <a href="https://nehu.academia.edu/Monnappakc" target="_blank" rel="noopener">Academia.edu</a>
+    </span>
+  </div>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  function isDark(){var e=root.getAttribute('data-theme'); if(e) return e==='dark';
+    return !!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);}
+  function sync(){ if(btn) btn.textContent = isDark() ? 'Light mode' : 'Dark mode'; }
+  if(btn) btn.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('kcm-theme',n)}catch(e){} sync();});
+  try{var s=localStorage.getItem('kcm-theme'); if(s==='light'||s==='dark') root.setAttribute('data-theme',s);}catch(e){}
+  sync();
+})();
+</script>
 </body>
 </html>
